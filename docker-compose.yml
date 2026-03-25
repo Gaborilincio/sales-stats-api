@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+
+  stats-service:
+    build: ./services/stats-service
+    container_name: stats-service
+    ports:
+      - "8001:8000"
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - stats-service
