@@ -1,6 +1,12 @@
 from fastapi import FastAPI
-from app.routes.stats import router as stats_router
+from pydantic import BaseModel
+from app.stats_service import calcular_estadisticas
 
 app = FastAPI()
 
-app.include_router(stats_router)
+class StatsInput(BaseModel):
+    ventas: list[float]
+
+@app.post("/stats")
+def stats(data: StatsInput):
+    return calcular_estadisticas(data.ventas)

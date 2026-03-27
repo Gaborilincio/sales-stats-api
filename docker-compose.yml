@@ -8,6 +8,24 @@ services:
     ports:
       - "8001:8000"
 
+  margen-service:
+    build: ./services/margen-service
+    container_name: margen-service
+    ports:
+      - "8002:8000"
+
+  equilibrio-service:
+    build: ./services/equilibrio-service
+    container_name: equilibrio-service
+    ports:
+      - "8003:8000"
+
+  analisis-service:
+    build: ./services/analisis-service
+    container_name: analisis-service
+    ports:
+      - "8004:8000"
+
   gateway:
     build: ./gateway
     container_name: gateway
@@ -15,3 +33,6 @@ services:
       - "8000:8000"
     depends_on:
       - stats-service
+      - margen-service
+      - equilibrio-service
+      - analisis-service
